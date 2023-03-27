@@ -83,12 +83,11 @@ local newOrg(id) = {
 local newWebhook() = {
   active: true,
   events: [ "push" ],
-  config: {
-    url: null,
-    # Can be one of: form, json
-    content_type: "form",
-    insecure_ssl: "0",
-  }
+  url: null,
+  # Can be one of: form, json
+  content_type: "form",
+  insecure_ssl: "0",
+  secret: null,
 };
 
 local newRepo(name) = {
