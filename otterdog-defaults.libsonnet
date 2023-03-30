@@ -157,8 +157,8 @@ local newBranchProtectionRule(pattern) = {
   requiresLinearHistory: false,
   requiresStatusChecks: true,
   requiresStrictStatusChecks: false,
-  restrictsReviewDismissals: false
-  #reviewDismissalAllowances: [],
+  restrictsReviewDismissals: false,
+  reviewDismissalAllowances: [],
 };
 
 {
