@@ -41,7 +41,7 @@ local newRepo(name) = {
   archived: false,
 
   # about private forks
-  allow_forking: false,
+  allow_forking: true,
 
   web_commit_signoff_required: true,
 
