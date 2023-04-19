@@ -1,3 +1,89 @@
+# Convert an object to an array of its values.
+local makeValueArray(obj) = [
+    obj[x]
+    for x in std.objectFields(obj)
+];
+
+# Merges an array of objects based on a specified key and converts the result back to an array.
+local mergeByKey(arr, key) = makeValueArray(std.foldl(function(x, y) x + { [y[key]]+: y }, arr, {}));
+
+# Function to create a new repository with default settings.
+local newRepo(name) = {
+  name: name,
+  description: null,
+  homepage: null,
+  private: false,
+
+  has_issues: true,
+  has_projects: true,
+  has_wiki: true,
+
+  default_branch: "main",
+
+  allow_rebase_merge: true,
+  allow_merge_commit: true,
+  allow_squash_merge: true,
+
+  allow_auto_merge: false,
+  delete_branch_on_merge: false,
+
+  allow_update_branch: true,
+
+  # Can be one of: PR_TITLE, COMMIT_OR_PR_TITLE
+  squash_merge_commit_title: "COMMIT_OR_PR_TITLE",
+  # Can be one of: PR_BODY, COMMIT_MESSAGES, BLANK
+  squash_merge_commit_message: "COMMIT_MESSAGES",
+  # Can be one of: PR_TITLE, MERGE_MESSAGE
+  merge_commit_title: "MERGE_MESSAGE",
+  # Can be one of: PR_BODY, PR_TITLE, BLANK
+  merge_commit_message: "PR_TITLE",
+
+  archived: false,
+
+  # about private forks
+  allow_forking: false,
+
+  web_commit_signoff_required: true,
+
+  # security analysis
+  secret_scanning: "enabled",
+  dependabot_alerts_enabled: true,
+
+  branch_protection_rules: []
+};
+
+# Function to extend an existing repo with the same name.
+local extendRepo(name) = {
+   name: name
+};
+
+# Function to create a new branch protection rule with default settings.
+local newBranchProtectionRule(pattern) = {
+  pattern: pattern,
+  allowsDeletions: false,
+  allowsForcePushes: false,
+  bypassForcePushAllowances: [],
+  bypassPullRequestAllowances: [],
+  dismissesStaleReviews: false,
+  isAdminEnforced: false,
+  lockAllowsFetchAndMerge: false,
+  lockBranch: false,
+  pushRestrictions: [],
+  #requiredStatusCheckContexts: [],
+  #requiredStatusChecks: [],
+  requiredApprovingReviewCount: 2,
+  requiresApprovingReviews: true,
+  requiresCodeOwnerReviews: false,
+  requiresCommitSignatures: false,
+  requiresConversationResolution: false,
+  requiresLinearHistory: false,
+  requiresStatusChecks: true,
+  requiresStrictStatusChecks: false,
+  restrictsReviewDismissals: false,
+  reviewDismissalAllowances: [],
+};
+
+# Function to create a new organization with default settings.
 local newOrg(id) = {
   github_id: id,
   settings: {
@@ -25,7 +111,8 @@ local newOrg(id) = {
     members_can_create_public_repositories: false,
 
     # Repository forking
-    members_can_fork_private_repositories: false,
+    # Its enabled by default to allow fine-grained control on repo level.
+    members_can_fork_private_repositories: true,
 
     # Repository defaults: Commit signoff
     web_commit_signoff_required: true,
@@ -77,9 +164,29 @@ local newOrg(id) = {
   },
 
   webhooks: [],
-  repositories: [],
+
+  # List of repositories of the organization.
+  # Entries here can be extended during template manifestation:
+  #  * new repos should be defined using the newRepo template
+  #  * extending existing repos inherited from the default config should be defined using the extendRepo template
+  _repositories:: [
+      newRepo('.eclipsefdn-private') {
+        description: "Repository to host configurations related to the Eclipse Foundation.",
+        private: true,
+        allow_forking: true,
+        delete_branch_on_merge: true,
+        has_projects: false,
+        has_wiki: false
+      }
+  ],
+
+  # Merges configuration settings for repositories defined in _repositories
+  # using the name of the repo as key. The result is unique array of repository
+  # configurations.
+  repositories: mergeByKey(self._repositories, "name"),
 };
 
+# Function to create a new organization webhook with default settings.
 local newWebhook() = {
   active: true,
   events: [ "push" ],
@@ -90,78 +197,10 @@ local newWebhook() = {
   secret: null,
 };
 
-local newRepo(name) = {
-  name: name,
-  description: null,
-  homepage: null,
-  private: false,
-
-  has_issues: true,
-  has_projects: true,
-  has_wiki: true,
-
-  default_branch: "main",
-
-  allow_rebase_merge: true,
-  allow_merge_commit: true,
-  allow_squash_merge: true,
-
-  allow_auto_merge: false,
-  delete_branch_on_merge: false,
-
-  allow_update_branch: true,
-
-  # Can be one of: PR_TITLE, COMMIT_OR_PR_TITLE
-  squash_merge_commit_title: "COMMIT_OR_PR_TITLE",
-  # Can be one of: PR_BODY, COMMIT_MESSAGES, BLANK
-  squash_merge_commit_message: "COMMIT_MESSAGES",
-  # Can be one of: PR_TITLE, MERGE_MESSAGE
-  merge_commit_title: "MERGE_MESSAGE",
-  # Can be one of: PR_BODY, PR_TITLE, BLANK
-  merge_commit_message: "PR_TITLE",
-
-  archived: false,
-
-  # about private forks
-  allow_forking: true,
-
-  web_commit_signoff_required: true,
-
-  # security analysis
-  secret_scanning: "enabled",
-  dependabot_alerts_enabled: true,
-
-  branch_protection_rules: []
-};
-
-local newBranchProtectionRule(pattern) = {
-  pattern: pattern,
-  allowsDeletions: false,
-  allowsForcePushes: false,
-  bypassForcePushAllowances: [],
-  bypassPullRequestAllowances: [],
-  dismissesStaleReviews: false,
-  isAdminEnforced: false,
-  lockAllowsFetchAndMerge: false,
-  lockBranch: false,
-  pushRestrictions: [],
-  #requiredStatusCheckContexts: [],
-  #requiredStatusChecks: [],
-  requiredApprovingReviewCount: 2,
-  requiresApprovingReviews: true,
-  requiresCodeOwnerReviews: false,
-  requiresCommitSignatures: false,
-  requiresConversationResolution: false,
-  requiresLinearHistory: false,
-  requiresStatusChecks: true,
-  requiresStrictStatusChecks: false,
-  restrictsReviewDismissals: false,
-  reviewDismissalAllowances: [],
-};
-
 {
   newOrg:: newOrg,
   newWebhook:: newWebhook,
   newRepo:: newRepo,
+  extendRepo:: extendRepo,
   newBranchProtectionRule:: newBranchProtectionRule
 }
