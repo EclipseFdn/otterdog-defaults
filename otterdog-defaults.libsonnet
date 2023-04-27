@@ -191,7 +191,7 @@ local newOrg(id) = {
 # Function to create a new organization webhook with default settings.
 local newWebhook() = {
   active: true,
-  events: [ "push" ],
+  events: [],
   url: null,
   # Can be one of: form, json
   content_type: "form",
