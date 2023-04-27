@@ -69,7 +69,10 @@ local newBranchProtectionRule(pattern) = {
   lockAllowsFetchAndMerge: false,
   lockBranch: false,
   pushRestrictions: [],
-  requiredStatusChecks: [],
+  requiredStatusChecks: [
+    # by default, the eclipse committer agreement check must pass.
+    "eclipse-eca-validation:eclipsefdn/eca",
+  ],
   requiredApprovingReviewCount: 2,
   requiresApprovingReviews: true,
   requiresCodeOwnerReviews: false,
