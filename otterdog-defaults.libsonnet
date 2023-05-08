@@ -83,6 +83,7 @@ local newBranchProtectionRule(pattern) = {
   requiresStrictStatusChecks: false,
   restrictsReviewDismissals: false,
   reviewDismissalAllowances: [],
+  requireLastPushApproval: false
 };
 
 # Function to create a new organization with default settings.
