@@ -1,5 +1,4 @@
-# Merges an array of objects based on a specified key and converts the result back to an array.
-local mergeByKey(arr, key) = std.objectValues(std.foldl(function(x, y) x + { [y[key]]+: y }, arr, {}));
+local otterdog = import 'otterdog-functions.libsonnet';
 
 # Function to create a new repository with default settings.
 local newRepo(name) = {
@@ -180,7 +179,7 @@ local newOrg(id) = {
   # Merges configuration settings for repositories defined in _repositories
   # using the name of the repo as key. The result is unique array of repository
   # configurations.
-  repositories: mergeByKey(self._repositories, "name"),
+  repositories: otterdog.mergeByKey(self._repositories, "name"),
 };
 
 # Function to create a new organization webhook with default settings.
