@@ -40,6 +40,8 @@ local newRepo(name) = {
 
   # security analysis
   secret_scanning: "enabled",
+  secret_scanning_push_protection: "enabled",
+
   dependabot_alerts_enabled: true,
 
   branch_protection_rules: []
