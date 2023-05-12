@@ -165,7 +165,7 @@ local newOrg(id) = {
 
     default_workflow_permissions: "read",
 
-    security_managers: []
+    security_managers: ["eclipsefdn-security"]
   },
 
   webhooks: [],
