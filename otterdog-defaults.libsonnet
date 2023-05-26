@@ -177,6 +177,7 @@ local newOrg(id) = {
   _repositories:: [
       newRepo('.eclipsefdn-private') {
         description: "Repository to host configurations related to the Eclipse Foundation.",
+        template_repository: "EclipseFdn/.eclipsefdn-private-template",
         private: true,
         allow_forking: true,
         delete_branch_on_merge: true,
