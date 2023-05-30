@@ -11,6 +11,8 @@ local newRepo(name) = {
   has_projects: true,
   has_wiki: true,
 
+  topics: [],
+
   is_template: false,
   template_repository: null,
 
