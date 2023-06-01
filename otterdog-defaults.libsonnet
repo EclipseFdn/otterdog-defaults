@@ -188,6 +188,9 @@ local newOrg(id) = {
       has_wiki: false,
       branch_protection_rules: [
         newBranchProtectionRule('main') {
+          bypass_pull_request_allowances: [
+            std.format("%s/eclipsefdn-security", $['github_id'])
+          ],
           requires_approving_reviews: true,
           required_approving_review_count: 1,
           requires_code_owner_reviews: true,
