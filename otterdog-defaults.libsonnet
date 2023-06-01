@@ -177,15 +177,27 @@ local newOrg(id) = {
   #  * new repos should be defined using the newRepo template
   #  * extending existing repos inherited from the default config should be defined using the extendRepo template
   _repositories:: [
-      newRepo('.eclipsefdn-private') {
-        description: "Repository to host configurations related to the Eclipse Foundation.",
-        template_repository: "EclipseFdn/.eclipsefdn-private-template",
-        private: true,
-        allow_forking: true,
-        delete_branch_on_merge: true,
-        has_projects: false,
-        has_wiki: false
-      }
+    newRepo('.eclipsefdn') {
+      description: "Repository to host configurations related to the Eclipse Foundation.",
+      template_repository: "EclipseFdn/.eclipsefdn-template",
+      post_process_template_content: [
+        ".github/CODEOWNERS"
+      ],
+      allow_forking: true,
+      delete_branch_on_merge: true,
+      has_projects: false,
+      has_wiki: false,
+      branch_protection_rules: [
+        newBranchProtectionRule('main') {
+          requires_approving_reviews: true,
+          required_approving_review_count: 1,
+          requires_code_owner_reviews: true,
+          requires_status_checks: false,
+          requires_strict_status_checks: false,
+          required_status_checks: [],
+        },
+      ],
+    }
   ],
 
   # Merges configuration settings for repositories defined in _repositories
