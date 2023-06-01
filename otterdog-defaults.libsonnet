@@ -114,8 +114,7 @@ local newOrg(id) = {
     members_can_create_public_repositories: false,
 
     # Repository forking
-    # Its enabled by default to allow fine-grained control on repo level.
-    members_can_fork_private_repositories: true,
+    members_can_fork_private_repositories: false,
 
     # Repository defaults: Commit signoff
     web_commit_signoff_required: true,
