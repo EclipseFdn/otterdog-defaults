@@ -193,7 +193,6 @@ local newOrg(id) = {
           required_approving_review_count: 1,
           requires_code_owner_reviews: true,
           requires_status_checks: false,
-          requires_strict_status_checks: false,
           required_status_checks: [],
         },
       ],
