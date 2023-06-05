@@ -15,6 +15,7 @@ local newRepo(name) = {
 
   is_template: false,
   template_repository: null,
+  auto_init: true,
 
   default_branch: "main",
 
