@@ -155,8 +155,6 @@ local newOrg(id) = {
 
     two_factor_requirement: true,
 
-    team_discussions_allowed: true,
-
     default_branch_name: "main",
 
     packages_containers_public: true,
