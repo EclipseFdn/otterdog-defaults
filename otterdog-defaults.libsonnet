@@ -84,7 +84,9 @@ local newBranchProtectionRule(pattern) = {
   requires_strict_status_checks: false,
   restricts_review_dismissals: false,
   review_dismissal_allowances: [],
-  require_last_push_approval: false
+  require_last_push_approval: false,
+  requires_deployments: false,
+  required_deployment_environments: []
 };
 
 # Function to create a new organization with default settings.
