@@ -50,6 +50,10 @@ local newRepo(name) = {
 
   dependabot_alerts_enabled: true,
 
+  # repository webhooks
+  webhooks: [],
+
+  # branch protection rules
   branch_protection_rules: []
 };
 
@@ -209,20 +213,24 @@ local newOrg(id) = {
 };
 
 # Function to create a new organization webhook with default settings.
-local newWebhook() = {
+local newOrgWebhook(url) = {
   active: true,
   events: [],
-  url: null,
+  url: url,
   # Can be one of: form, json
   content_type: "form",
   insecure_ssl: "0",
   secret: null,
 };
 
+# Function to create a new repository webhook with default settings.
+local newRepoWebhook(url) = newOrgWebhook(url);
+
 {
   newOrg:: newOrg,
-  newWebhook:: newWebhook,
+  newOrgWebhook:: newOrgWebhook,
   newRepo:: newRepo,
   extendRepo:: extendRepo,
+  newRepoWebhook:: newRepoWebhook,
   newBranchProtectionRule:: newBranchProtectionRule
 }
