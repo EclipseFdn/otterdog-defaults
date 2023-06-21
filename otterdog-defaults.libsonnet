@@ -53,6 +53,9 @@ local newRepo(name) = {
   # repository webhooks
   webhooks: [],
 
+  # repository environments
+  environments: [],
+
   # branch protection rules
   branch_protection_rules: []
 };
@@ -226,11 +229,22 @@ local newOrgWebhook(url) = {
 # Function to create a new repository webhook with default settings.
 local newRepoWebhook(url) = newOrgWebhook(url);
 
+# Function to create a new environment with default settings.
+local newEnvironment(name) = {
+  name: name,
+  wait_timer: 0,
+  reviewers: [],
+  # Can be one of: all, protected_branches, branch_policies
+  deployment_branch_policy: "all",
+  branch_policies: [],
+};
+
 {
   newOrg:: newOrg,
   newOrgWebhook:: newOrgWebhook,
   newRepo:: newRepo,
   extendRepo:: extendRepo,
   newRepoWebhook:: newRepoWebhook,
-  newBranchProtectionRule:: newBranchProtectionRule
+  newBranchProtectionRule:: newBranchProtectionRule,
+  newEnvironment:: newEnvironment
 }
