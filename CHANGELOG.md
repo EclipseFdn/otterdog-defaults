@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added organization and repository setting `secrets` and associated template function to model secrets.
 - Added repository setting `environments` and associated template function to model environments on repository level.
 - Added repository setting `webhooks` to model webhooks on repository level.
 

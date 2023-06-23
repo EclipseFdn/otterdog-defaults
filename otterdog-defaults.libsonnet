@@ -177,6 +177,7 @@ local newOrg(id) = {
     security_managers: ["eclipsefdn-security"]
   },
 
+  secrets: [],
   webhooks: [],
 
   # List of repositories of the organization.
@@ -229,6 +230,20 @@ local newOrgWebhook(url) = {
 # Function to create a new repository webhook with default settings.
 local newRepoWebhook(url) = newOrgWebhook(url);
 
+# Function to create a new organization secret with default settings.
+local newOrgSecret(name) = {
+  name: name,
+  visibility: "public",
+  selected_repositories: [],
+  value: null
+};
+
+# Function to create a new repository secret with default settings.
+local newRepoSecret(name) = {
+  name: name,
+  value: null
+};
+
 # Function to create a new environment with default settings.
 local newEnvironment(name) = {
   name: name,
@@ -242,9 +257,11 @@ local newEnvironment(name) = {
 {
   newOrg:: newOrg,
   newOrgWebhook:: newOrgWebhook,
+  newOrgSecret:: newOrgSecret,
   newRepo:: newRepo,
   extendRepo:: extendRepo,
   newRepoWebhook:: newRepoWebhook,
+  newRepoSecret:: newRepoSecret,
   newBranchProtectionRule:: newBranchProtectionRule,
   newEnvironment:: newEnvironment
 }
