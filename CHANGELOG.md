@@ -10,7 +10,12 @@
 
 ### Removed
 
+- Removed organization setting `organization_projects_enabled` which encodes the same information as `has_organization_projects`.
 - Removed organization setting `team_discussions_allowed` which has been removed from the GitHub Web UI.
+
+### Changed
+
+- Changed organization setting `members_can_change_project_visibility` to `true`.
 
 
 ## [0.1.0] - 2022/06/12

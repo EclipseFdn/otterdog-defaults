@@ -169,8 +169,7 @@ local newOrg(id) = {
     packages_containers_public: true,
     packages_containers_internal: true,
 
-    organization_projects_enabled: true,
-    members_can_change_project_visibility: false,
+    members_can_change_project_visibility: true,
 
     default_workflow_permissions: "read",
 
