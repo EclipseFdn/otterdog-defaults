@@ -7,6 +7,7 @@ local newRepo(name) = {
   homepage: null,
   private: false,
 
+  has_discussions: false,
   has_issues: true,
   has_projects: true,
   has_wiki: true,
@@ -109,6 +110,9 @@ local newOrg(id) = {
     location: null,
     description: null,
     blog: null,
+
+    has_discussions: false,
+    discussion_source_repository: null,
 
     has_organization_projects: true,
     has_repository_projects: true,
