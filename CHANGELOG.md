@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added support for `dependabot_security_updates_enabled` setting for a repository.
 - Added support for discussions on organizational and repository level.
 - Added organization and repository setting `secrets` and associated template function to model secrets.
 - Added repository setting `environments` and associated template function to model environments on repository level.

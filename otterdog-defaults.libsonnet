@@ -50,6 +50,7 @@ local newRepo(name) = {
   secret_scanning_push_protection: "enabled",
 
   dependabot_alerts_enabled: true,
+  dependabot_security_updates_enabled: false,
 
   # repository webhooks
   webhooks: [],
