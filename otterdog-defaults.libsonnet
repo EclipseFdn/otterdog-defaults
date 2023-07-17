@@ -202,6 +202,7 @@ local newOrg(id) = {
       branch_protection_rules: [
         newBranchProtectionRule('main') {
           bypass_pull_request_allowances: [
+            std.format("@%s/eclipsefdn-releng", $['github_id']),
             std.format("@%s/eclipsefdn-security", $['github_id'])
           ],
           requires_approving_reviews: true,
