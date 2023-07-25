@@ -4,7 +4,6 @@
 
 ### Added
 
-- Added organization setting `members_can_create_private_pages`.
 - Added support for `dependabot_security_updates_enabled` setting for a repository.
 - Added support for discussions on organizational and repository level.
 - Added organization and repository setting `secrets` and associated template function to model secrets.
