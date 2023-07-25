@@ -135,7 +135,7 @@ local newOrg(id) = {
     web_commit_signoff_required: true,
 
     # GitHub Pages
-    members_can_create_pages: true,
+    members_can_create_private_pages: false,
     members_can_create_public_pages: true,
 
     dependabot_alerts_enabled_for_new_repositories: true,

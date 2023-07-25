@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added organization setting `members_can_create_private_pages`.
 - Added support for `dependabot_security_updates_enabled` setting for a repository.
 - Added support for discussions on organizational and repository level.
 - Added organization and repository setting `secrets` and associated template function to model secrets.
@@ -12,6 +13,7 @@
 
 ### Removed
 
+- Removed organization setting `members_can_create_pages`.
 - Removed organization setting `organization_projects_enabled` which encodes the same information as `has_organization_projects`.
 - Removed organization setting `team_discussions_allowed` which has been removed from the GitHub Web UI.
 
