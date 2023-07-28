@@ -83,8 +83,8 @@ local newBranchProtectionRule(pattern) = {
     # by default, the eclipse contributor agreement check must pass.
     "eclipse-eca-validation:eclipsefdn/eca",
   ],
+  requires_pull_request: true,
   required_approving_review_count: 2,
-  requires_approving_reviews: true,
   requires_code_owner_reviews: false,
   requires_commit_signatures: false,
   requires_conversation_resolution: false,
