@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added support for `blocks_creations` and `restricts_pushes` settings for a branch protection rule.
 - Added validation rules to enforce certain organization settings.
 - Added support for `dependabot_security_updates_enabled` setting for a repository.
 - Added support for discussions on organizational and repository level.

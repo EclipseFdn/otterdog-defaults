@@ -78,6 +78,8 @@ local newBranchProtectionRule(pattern) = {
   is_admin_enforced: false,
   lock_allows_fetch_and_merge: false,
   lock_branch: false,
+  restricts_pushes: false,
+  blocks_creations: false,
   push_restrictions: [],
   required_status_checks: [
     # by default, the eclipse contributor agreement check must pass.
