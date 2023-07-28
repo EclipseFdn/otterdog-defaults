@@ -52,6 +52,11 @@ local newRepo(name) = {
   dependabot_alerts_enabled: true,
   dependabot_security_updates_enabled: false,
 
+  # GitHub pages
+  gh_pages_build_type: "disabled",
+  gh_pages_source_branch: null,
+  gh_pages_source_path: null,
+
   # repository webhooks
   webhooks: [],
 
