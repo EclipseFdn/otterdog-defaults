@@ -204,7 +204,7 @@ local newOrg(id) = {
             std.format("@%s/eclipsefdn-releng", $['github_id']),
             std.format("@%s/eclipsefdn-security", $['github_id'])
           ],
-          requires_approving_reviews: true,
+          requires_pull_request: true,
           required_approving_review_count: 1,
           requires_code_owner_reviews: true,
           requires_status_checks: false,
