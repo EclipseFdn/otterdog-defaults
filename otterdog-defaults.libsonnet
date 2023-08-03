@@ -105,6 +105,44 @@ local newBranchProtectionRule(pattern) = {
   required_deployment_environments: []
 };
 
+# Function to create a new organization webhook with default settings.
+local newOrgWebhook(url) = {
+  active: true,
+  events: [],
+  url: url,
+  # Can be one of: form, json
+  content_type: "form",
+  insecure_ssl: "0",
+  secret: null,
+};
+
+# Function to create a new repository webhook with default settings.
+local newRepoWebhook(url) = newOrgWebhook(url);
+
+# Function to create a new organization secret with default settings.
+local newOrgSecret(name) = {
+  name: name,
+  visibility: "public",
+  selected_repositories: [],
+  value: null
+};
+
+# Function to create a new repository secret with default settings.
+local newRepoSecret(name) = {
+  name: name,
+  value: null
+};
+
+# Function to create a new environment with default settings.
+local newEnvironment(name) = {
+  name: name,
+  wait_timer: 0,
+  reviewers: [],
+  # Can be one of: all, protected_branches, branch_policies
+  deployment_branch_policy: "all",
+  branch_policies: [],
+};
+
 # Function to create a new organization with default settings.
 local newOrg(id) = {
   github_id: id,
@@ -199,10 +237,13 @@ local newOrg(id) = {
       description: "Repository to host configurations related to the Eclipse Foundation.",
       template_repository: "EclipseFdn/.eclipsefdn-template",
       post_process_template_content: [
-        ".github/CODEOWNERS"
+        ".github/CODEOWNERS",
+        "docs/index.md"
       ],
       allow_forking: true,
+      allow_merge_commit: false,
       delete_branch_on_merge: true,
+      gh_pages_build_type: "workflow",
       has_projects: false,
       has_wiki: false,
       branch_protection_rules: [
@@ -218,6 +259,14 @@ local newOrg(id) = {
           required_status_checks: [],
         },
       ],
+      environments: [
+        newEnvironment('github-pages') {
+          branch_policies: [
+            "main"
+          ],
+          deployment_branch_policy: "selected",
+        }
+      ],
     }
   ],
 
@@ -225,44 +274,6 @@ local newOrg(id) = {
   # using the name of the repo as key. The result is unique array of repository
   # configurations.
   repositories: otterdog.mergeByKey(self._repositories, "name"),
-};
-
-# Function to create a new organization webhook with default settings.
-local newOrgWebhook(url) = {
-  active: true,
-  events: [],
-  url: url,
-  # Can be one of: form, json
-  content_type: "form",
-  insecure_ssl: "0",
-  secret: null,
-};
-
-# Function to create a new repository webhook with default settings.
-local newRepoWebhook(url) = newOrgWebhook(url);
-
-# Function to create a new organization secret with default settings.
-local newOrgSecret(name) = {
-  name: name,
-  visibility: "public",
-  selected_repositories: [],
-  value: null
-};
-
-# Function to create a new repository secret with default settings.
-local newRepoSecret(name) = {
-  name: name,
-  value: null
-};
-
-# Function to create a new environment with default settings.
-local newEnvironment(name) = {
-  name: name,
-  wait_timer: 0,
-  reviewers: [],
-  # Can be one of: all, protected_branches, branch_policies
-  deployment_branch_policy: "all",
-  branch_policies: [],
 };
 
 {
