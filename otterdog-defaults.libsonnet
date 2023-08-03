@@ -238,7 +238,8 @@ local newOrg(id) = {
       template_repository: "EclipseFdn/.eclipsefdn-template",
       post_process_template_content: [
         ".github/CODEOWNERS",
-        "docs/index.md"
+        "README.md",
+        "mkdocs.yml"
       ],
       allow_forking: true,
       allow_merge_commit: false,
