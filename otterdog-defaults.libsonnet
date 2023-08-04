@@ -235,6 +235,7 @@ local newOrg(id) = {
   _repositories:: [
     newRepo('.eclipsefdn') {
       description: "Repository to host configurations related to the Eclipse Foundation.",
+      homepage: std.format("https://%s.github.io/.eclipsefdn/", $['github_id']),
       template_repository: "EclipseFdn/.eclipsefdn-template",
       post_process_template_content: [
         ".github/CODEOWNERS",
