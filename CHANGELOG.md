@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added support for workflow setting on organization level.
 - Added support for GitHub Pages configuration for a repository.
 - Added support for `blocks_creations` and `restricts_pushes` settings for a branch protection rule.
 - Added validation rules to enforce certain organization settings.
@@ -15,6 +16,7 @@
 
 ### Removed
 
+- Removed organization setting `default_workflow_permissions` which is now part of the workflow settings.
 - Removed organization setting `members_can_create_pages`.
 - Removed organization setting `organization_projects_enabled` which encodes the same information as `has_organization_projects`.
 - Removed organization setting `team_discussions_allowed` which has been removed from the GitHub Web UI.

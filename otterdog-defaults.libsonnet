@@ -220,9 +220,25 @@ local newOrg(id) = {
 
     members_can_change_project_visibility: true,
 
-    default_workflow_permissions: "read",
+    security_managers: ["eclipsefdn-security"],
 
-    security_managers: ["eclipsefdn-security"]
+    workflows: {
+      # enable workflows for all repositories
+      enabled_repositories: "all",
+      selected_repositories: [],
+
+      # allow all actions by default
+      allowed_actions: "all",
+      allow_github_owned_actions: true,
+      allow_verified_creator_actions: true,
+      allow_action_patterns: [],
+
+      # issue read tokens by default
+      default_workflow_permissions: "read",
+
+      # allow actions to approve and merge pull requests
+      actions_can_approve_pull_request_reviews: true,
+    }
   },
 
   secrets: [],
