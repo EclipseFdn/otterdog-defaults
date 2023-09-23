@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.3.0] - unreleased
+
+### Added
+
+
 ## [0.2.0] - 2023/09/23
 
 ### Added
