@@ -24,6 +24,7 @@
 
 ### Changed
 
+- Changed repository setting `delete_branch_on_merge` to `true`.
 - Changed repository setting `allow_merge_commit` to `false`.
 - Added GitHub Pages configuration for '.eclipsefdn' repo.
 - Disallow merge commits for '.eclipsefdn' repo.
