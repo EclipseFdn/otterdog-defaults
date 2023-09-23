@@ -24,6 +24,7 @@
 
 ### Changed
 
+- Changed repository setting `allow_merge_commit` to `false`.
 - Added GitHub Pages configuration for '.eclipsefdn' repo.
 - Disallow merge commits for '.eclipsefdn' repo.
 - Renamed branch protection rule property `required_approving_reviews` to `requires_pull_request` which is more consistent with its semantics.
