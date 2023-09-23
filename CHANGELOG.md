@@ -1,6 +1,6 @@
 # Change Log
 
-## [0.2.0] - unreleased
+## [0.2.0] - 2023/09/23
 
 ### Added
 
@@ -32,6 +32,6 @@
 - Changed organization setting `members_can_change_project_visibility` to `true`.
 
 
-## [0.1.0] - 2022/06/12
+## [0.1.0] - 2023/06/12
 
 Initial version.
