@@ -57,6 +57,22 @@ local newRepo(name) = {
   gh_pages_source_branch: null,
   gh_pages_source_path: null,
 
+  workflows: {
+    enabled: true,
+
+    # allow all actions by default
+    allowed_actions: "all",
+    allow_github_owned_actions: true,
+    allow_verified_creator_actions: true,
+    allow_action_patterns: [],
+
+    # issue read tokens by default
+    default_workflow_permissions: "read",
+
+    # allow actions to approve and merge pull requests
+    actions_can_approve_pull_request_reviews: true,
+  },
+
   # repository webhooks
   webhooks: [],
 

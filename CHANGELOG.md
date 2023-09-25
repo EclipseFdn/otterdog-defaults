@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added support for workflow settings on repository level.
 
 ## [0.2.0] - 2023/09/23
 
