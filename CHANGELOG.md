@@ -10,7 +10,7 @@
 
 ### Added
 
-- Added a pre hook when adding repositories to warn the user in case the project has not github.org field set in the PMI.
+- Added a pre hook when adding repositories to warn the user in case the project has no github.org field set in the PMI.
 - Added support for workflow setting on organization level.
 - Added support for GitHub Pages configuration for a repository.
 - Added support for `blocks_creations` and `restricts_pushes` settings for a branch protection rule.
