@@ -319,7 +319,7 @@ local newOrg(id) = {
       has_projects: false,
       has_wiki: false,
 
-      workflows: {
+      workflows+: {
         actions_can_approve_pull_request_reviews: false,
       },
 
