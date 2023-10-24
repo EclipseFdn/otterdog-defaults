@@ -80,7 +80,10 @@ local newRepo(name) = {
   environments: [],
 
   # branch protection rules
-  branch_protection_rules: []
+  branch_protection_rules: [],
+  
+  # rulesets
+  rulesets: []
 };
 
 # Function to extend an existing repo with the same name.
@@ -119,6 +122,41 @@ local newBranchProtectionRule(pattern) = {
   require_last_push_approval: false,
   requires_deployments: false,
   required_deployment_environments: []
+};
+
+# Function to create a new repository ruleset with default settings.
+local newRepoRuleset(name) = {
+  name: name,
+  enforcement: "active",
+
+  include_refs: [],
+  exclude_refs: [],
+
+  allows_creations: false,
+  allows_deletions: false,
+  allows_force_pushes: false,
+  allows_updates: false,
+
+  bypass_actors: [],
+
+  requires_pull_request: true,
+  required_approving_review_count: 2,
+  requires_code_owner_review: false,
+  requires_last_push_approval: true,
+  requires_review_thread_resolution: true,
+  dismisses_stale_reviews: true,
+
+  requires_linear_history: false,
+  requires_commit_signatures: true,
+
+  requires_status_checks: true,
+  required_status_checks: [
+    "eclipse-eca-validation:eclipsefdn/eca"
+  ],
+  requires_strict_status_checks: false,
+
+  requires_deployments: false,
+  required_deployment_environments: [],
 };
 
 # Function to create a new organization webhook with default settings.
@@ -319,5 +357,6 @@ local newOrg(id) = {
   newRepoWebhook:: newRepoWebhook,
   newRepoSecret:: newRepoSecret,
   newBranchProtectionRule:: newBranchProtectionRule,
+  newRepoRuleset:: newRepoRuleset,
   newEnvironment:: newEnvironment
 }
