@@ -318,6 +318,11 @@ local newOrg(id) = {
       gh_pages_build_type: "workflow",
       has_projects: false,
       has_wiki: false,
+
+      workflows: {
+        actions_can_approve_pull_request_reviews: false,
+      },
+
       branch_protection_rules: [
         newBranchProtectionRule('main') {
           bypass_pull_request_allowances: [
