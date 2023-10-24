@@ -221,7 +221,7 @@ local newOrg(id) = {
     # Since organization members can have permissions from multiple sources, members and collaborators who have been
     # granted a higher level of access than the base permissions will retain their higher permission privileges.
     # Can be one of: read, write, admin, none
-    default_repository_permission: "read",
+    default_repository_permission: "none",
 
     # Repository creation
     members_can_create_private_repositories: false,

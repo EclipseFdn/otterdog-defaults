@@ -7,6 +7,11 @@
 - Added support for repository rulesets.
 - Added support for workflow settings on repository level.
 
+### Changed
+
+- Changed organization setting `default_repository_permission` to `none`.
+
+
 ## [0.2.0] - 2023/09/23
 
 ### Added
