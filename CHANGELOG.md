@@ -1,9 +1,10 @@
 # Change Log
 
-## [0.4.0-dev] - unreleased
+## [0.4.0] - 2023/10/25
 
-### Added
+### Changed
 
+- Enforce organization setting `billing_email` to value `webmaster@eclipse-foundation.org`.
 
 ## [0.3.0] - 2023/10/24
 
