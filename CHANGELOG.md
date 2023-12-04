@@ -1,10 +1,18 @@
 # Change Log
 
+## [0.5.0] - 2023/12/04
+
+### Added
+
+- Added support for organization and repository variables.
+
+
 ## [0.4.0] - 2023/10/25
 
 ### Changed
 
 - Enforce organization setting `billing_email` to value `webmaster@eclipse-foundation.org`.
+
 
 ## [0.3.0] - 2023/10/24
 

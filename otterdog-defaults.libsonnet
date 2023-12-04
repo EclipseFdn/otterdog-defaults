@@ -76,6 +76,12 @@ local newRepo(name) = {
   # repository webhooks
   webhooks: [],
 
+  # repository secrets
+  secrets: [],
+
+  # repository variables
+  variables: [],
+
   # repository environments
   environments: [],
 
@@ -183,6 +189,20 @@ local newOrgSecret(name) = {
 
 # Function to create a new repository secret with default settings.
 local newRepoSecret(name) = {
+  name: name,
+  value: null
+};
+
+# Function to create a new organization variable with default settings.
+local newOrgVariable(name) = {
+  name: name,
+  visibility: "public",
+  selected_repositories: [],
+  value: null
+};
+
+# Function to create a new repository variable with default settings.
+local newRepoVariable(name) = {
   name: name,
   value: null
 };
@@ -295,7 +315,13 @@ local newOrg(id) = {
     }
   },
 
+  # organization secrets
   secrets: [],
+
+  # organization variables
+  variables: [],
+
+  # organization webhooks
   webhooks: [],
 
   # List of repositories of the organization.
@@ -357,10 +383,12 @@ local newOrg(id) = {
   newOrg:: newOrg,
   newOrgWebhook:: newOrgWebhook,
   newOrgSecret:: newOrgSecret,
+  newOrgVariable:: newOrgVariable,
   newRepo:: newRepo,
   extendRepo:: extendRepo,
   newRepoWebhook:: newRepoWebhook,
   newRepoSecret:: newRepoSecret,
+  newRepoVariable:: newRepoVariable,
   newBranchProtectionRule:: newBranchProtectionRule,
   newRepoRuleset:: newRepoRuleset,
   newEnvironment:: newEnvironment
