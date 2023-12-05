@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.6.0] - 2023/12/05
+
+### Added
+
+- Added support for creating new repositories as fork.
+
+
 ## [0.5.0] - 2023/12/04
 
 ### Added

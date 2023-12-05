@@ -18,6 +18,9 @@ local newRepo(name) = {
   template_repository: null,
   auto_init: true,
 
+  forked_repository: null,
+  fork_default_branch_only: true,
+
   default_branch: "main",
 
   allow_rebase_merge: true,
