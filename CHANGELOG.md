@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.7.0] - 2023/12/09
+
+### Changed
+
+- Setting organization setting `plan` to value `enterprise`.
+
+
 ## [0.6.0] - 2023/12/05
 
 ### Added

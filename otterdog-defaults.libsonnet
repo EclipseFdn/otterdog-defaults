@@ -225,7 +225,7 @@ local newOrg(id) = {
   github_id: id,
   settings: {
     name: null,
-    plan: "free",
+    plan: "enterprise",
     billing_email: "webmaster@eclipse-foundation.org",
     company: null,
     email: null,
