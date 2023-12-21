@@ -359,10 +359,11 @@ local newOrg(id) = {
             std.format("@%s/eclipsefdn-security", $['github_id'])
           ],
           requires_pull_request: true,
-          required_approving_review_count: 1,
+          required_approving_review_count: 0,
           requires_code_owner_reviews: true,
-          requires_status_checks: false,
-          required_status_checks: [],
+          requires_status_checks: true,
+          requires_strict_status_checks: true,
+          required_status_checks: ['validate'],
         },
       ],
       environments: [
