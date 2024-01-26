@@ -12,9 +12,16 @@ if isinstance(model_object, Repository):
 
     response = requests.get(f"https://projects.eclipse.org/api/projects/{project_name}")
 
-    has_github_org = False
     if response.status_code == 200:
         projects = response.json()
+    else:
+        projects = []
+
+
+    if len(projects) == 0:
+        print_warn(f"No Eclipse project found for project with name '{project_name}'.")
+    else:
+        has_github_org = False
         for project in projects:
             github = project.get("github", None)
             if github is not None:
@@ -29,5 +36,3 @@ if isinstance(model_object, Repository):
                 f"Don't forget to add an entry for this repo to the list of GitHub repositories: \n"
                 f"  https://github.com/{org_config.github_id}/{repository.name}"
             )
-    elif response.status_code == 404:
-        print_warn(f"No Eclipse project found for project with name '{project_name}'.")
