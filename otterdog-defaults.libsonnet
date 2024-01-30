@@ -363,7 +363,7 @@ local newOrg(id) = {
           requires_code_owner_reviews: true,
           requires_status_checks: true,
           requires_strict_status_checks: true,
-          required_status_checks: ['validate'],
+          required_status_checks: ['eclipse-otterdog-app:eclipsefdn/otterdog-sync', 'eclipse-otterdog-app:eclipsefdn/otterdog-validation'],
         },
       ],
       environments: [

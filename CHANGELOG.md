@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.7.2] - 2024/01/30
+
+### Changes
+
+- Changed required status checks for pull requests in the `.eclipsefdn` repo.
+
+
 ## [0.7.1] - 2023/12/21
 
 ### Changes
