@@ -3,7 +3,6 @@
 import requests
 from typing import cast
 
-from otterdog.utils import print_warn
 from otterdog.models.repository import Repository
 
 if isinstance(model_object, Repository):
