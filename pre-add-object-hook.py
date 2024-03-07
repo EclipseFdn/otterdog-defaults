@@ -19,7 +19,7 @@ if isinstance(model_object, Repository):
 
 
     if len(projects) == 0:
-        print_warn(f"No Eclipse project found for project with name '{project_name}'.")
+        self.printer.print_warn(f"No Eclipse project found for project with name '{project_name}'.")
     else:
         has_github_org = False
         for project in projects:
@@ -30,7 +30,7 @@ if isinstance(model_object, Repository):
                     has_github_org = True
 
         if has_github_org is False:
-            print_warn(
+            self.printer.print_warn(
                 f"Adding repository '{repository.name}' while the project '{project_name}' has no "
                 f"GitHub organization configured in the PMI.\n"
                 f"Don't forget to add an entry for this repo to the list of GitHub repositories: \n"
