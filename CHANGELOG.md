@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.8.0] - 2024/03/11
+
+### Added
+
+- Added support for repository setting `private_vulnerability_reporting_enabled`.
+
 ## [0.7.2] - 2024/01/30
 
 ### Changes

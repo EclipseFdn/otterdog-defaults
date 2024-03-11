@@ -55,6 +55,9 @@ local newRepo(name) = {
   dependabot_alerts_enabled: true,
   dependabot_security_updates_enabled: false,
 
+  # disable reporting by default for now
+  private_vulnerability_reporting_enabled: true,
+
   # GitHub pages
   gh_pages_build_type: "disabled",
   gh_pages_source_branch: null,
