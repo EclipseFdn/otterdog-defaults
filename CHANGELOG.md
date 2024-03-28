@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.8.1] - 2024/03/28
+
+### Changed
+
+- Changed `dismisses_stale_reviews` to `true` for pull requests in the `.eclipsefdn` repo.
+
+
 ## [0.8.0] - 2024/03/11
 
 ### Added
