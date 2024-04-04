@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.8.2] - 2024/04/04
+
+### Changed
+
+- Changed organization setting `readers_can_create_discussions` to `true`.
+
+
 ## [0.8.1] - 2024/03/28
 
 ### Changed

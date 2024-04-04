@@ -283,7 +283,7 @@ local newOrg(id) = {
     # If enabled, all users with read access can create and comment on discussions in repositories of the organization.
     # If disabled, discussion creation is limited to users with at least triage permission.
     # Users with read access can still comment on discussions.
-    readers_can_create_discussions: false,
+    readers_can_create_discussions: true,
 
     ## Member team permissions
 
