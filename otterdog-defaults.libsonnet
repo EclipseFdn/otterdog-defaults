@@ -58,6 +58,11 @@ local newRepo(name) = {
   # disable reporting by default for now
   private_vulnerability_reporting_enabled: false,
 
+  # code scanning default setup
+  code_scanning_default_setup_enabled: false,
+  code_scanning_default_query_suite: "default",
+  code_scanning_default_languages: [],
+
   # GitHub pages
   gh_pages_build_type: "disabled",
   gh_pages_source_branch: null,
