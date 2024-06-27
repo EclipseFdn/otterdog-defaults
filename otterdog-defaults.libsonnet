@@ -246,7 +246,6 @@ local newOrg(id) = {
     discussion_source_repository: null,
 
     has_organization_projects: true,
-    has_repository_projects: true,
 
     # Base permissions to the organization’s repositories apply to all members and exclude outside collaborators.
     # Since organization members can have permissions from multiple sources, members and collaborators who have been
@@ -267,9 +266,8 @@ local newOrg(id) = {
     # GitHub Pages
     members_can_create_public_pages: true,
 
-    dependabot_alerts_enabled_for_new_repositories: true,
-    dependabot_security_updates_enabled_for_new_repositories: true,
-    dependency_graph_enabled_for_new_repositories: true,
+    # Disable default code security configurations
+    default_code_security_configurations_disabled: true,
 
     ## Admin repository permissions
 
@@ -372,7 +370,7 @@ local newOrg(id) = {
           requires_code_owner_reviews: true,
           requires_status_checks: true,
           requires_strict_status_checks: true,
-          required_status_checks: ['eclipse-otterdog-app:eclipsefdn/otterdog-sync', 'eclipse-otterdog-app:eclipsefdn/otterdog-validation'],
+          required_status_checks: ['eclipse-otterdog:eclipsefdn/otterdog-sync', 'eclipse-otterdog:eclipsefdn/otterdog-validation'],
         },
       ],
       environments: [

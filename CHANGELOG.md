@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.8.4] - unreleased
+
+### Added
+
+- Added configuration to disable default code security configurations.
+
+### Changed
+
+- Updated reference to Eclipse Otterdog app as its slug has changed.
+- Removed default values for deprecated and obsolete organization settings.
+
+
 ## [0.8.3] - 2024/06/05
 
 ### Added
