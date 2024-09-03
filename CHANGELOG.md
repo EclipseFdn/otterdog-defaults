@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.8.5] - 2024/09/03
+
+### Added
+
+- Added configuration for custom properties.
+
 ## [0.8.4] - 2024/06/27
 
 ### Added
