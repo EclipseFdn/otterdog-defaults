@@ -68,6 +68,9 @@ local newRepo(name) = {
   gh_pages_source_branch: null,
   gh_pages_source_path: null,
 
+  # Custom Properties
+  custom_properties: {},
+
   workflows: {
     enabled: true,
 
@@ -228,6 +231,16 @@ local newEnvironment(name) = {
   branch_policies: [],
 };
 
+# Function to create a new custom property with default settings.
+local newCustomProperty(name) = {
+  name: name,
+  value_type: "string",
+  required: false,
+  default_value: null,
+  description: null,
+  allowed_values: [],
+};
+
 # Function to create a new organization with default settings.
 local newOrg(id) = {
   github_id: id,
@@ -304,6 +317,8 @@ local newOrg(id) = {
     members_can_change_project_visibility: true,
 
     security_managers: ["eclipsefdn-security"],
+
+    custom_properties: [],
 
     workflows: {
       # enable workflows for all repositories
@@ -395,6 +410,7 @@ local newOrg(id) = {
   newOrgWebhook:: newOrgWebhook,
   newOrgSecret:: newOrgSecret,
   newOrgVariable:: newOrgVariable,
+  newCustomProperty:: newCustomProperty,
   newRepo:: newRepo,
   extendRepo:: extendRepo,
   newRepoWebhook:: newRepoWebhook,
