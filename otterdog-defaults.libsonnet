@@ -431,5 +431,6 @@ local newOrg(id) = {
   newRepoVariable:: newRepoVariable,
   newBranchProtectionRule:: newBranchProtectionRule,
   newRepoRuleset:: newRepoRuleset,
-  newEnvironment:: newEnvironment
+  newEnvironment:: newEnvironment,
+  newMergeQueue:: newMergeQueue,
 }
