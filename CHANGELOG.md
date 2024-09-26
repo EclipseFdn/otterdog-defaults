@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.9.0] - 2024/09/26
+
+### Changed
+
+- Changed repository ruleset configuration to be aligned with branch protection rule configuration.
+- Converted pull request related configurations of a ruleset to an embedded model.
+
 ## [0.8.6] - 2024/09/26
 
 ### Added

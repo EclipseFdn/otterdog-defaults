@@ -144,6 +144,15 @@ local newBranchProtectionRule(pattern) = {
   required_deployment_environments: []
 };
 
+# Function to create a pull request with default settings.
+local newPullRequest() = {
+  required_approving_review_count: 2,
+  requires_code_owner_review: false,
+  requires_last_push_approval: false,
+  requires_review_thread_resolution: false,
+  dismisses_stale_reviews: false,
+};
+
 # Function to create a new repository ruleset with default settings.
 local newRepoRuleset(name) = {
   name: name,
@@ -155,19 +164,14 @@ local newRepoRuleset(name) = {
   allows_creations: false,
   allows_deletions: false,
   allows_force_pushes: false,
-  allows_updates: false,
+  allows_updates: true,
 
   bypass_actors: [],
 
-  requires_pull_request: true,
-  required_approving_review_count: 2,
-  requires_code_owner_review: false,
-  requires_last_push_approval: true,
-  requires_review_thread_resolution: true,
-  dismisses_stale_reviews: true,
+  required_pull_request: newPullRequest(),
 
   requires_linear_history: false,
-  requires_commit_signatures: true,
+  requires_commit_signatures: false,
 
   requires_status_checks: true,
   required_status_checks: [
@@ -181,7 +185,7 @@ local newRepoRuleset(name) = {
   required_merge_queue: null,
 };
 
-# Function to create a new merge queue with default settings.
+# Function to create a merge queue with default settings.
 local newMergeQueue() = {
   merge_method: "MERGE",
   build_concurrency: 5,
@@ -432,5 +436,6 @@ local newOrg(id) = {
   newBranchProtectionRule:: newBranchProtectionRule,
   newRepoRuleset:: newRepoRuleset,
   newEnvironment:: newEnvironment,
+  newPullRequest:: newPullRequest,
   newMergeQueue:: newMergeQueue,
 }
