@@ -177,6 +177,19 @@ local newRepoRuleset(name) = {
 
   requires_deployments: false,
   required_deployment_environments: [],
+  
+  required_merge_queue: null,
+};
+
+# Function to create a new merge queue with default settings.
+local newMergeQueue() = {
+  merge_method: "MERGE",
+  build_concurrency: 5,
+  min_group_size: 1,
+  max_group_size: 5,
+  wait_time_for_minimum_group_size: 5,
+  status_check_timeout: 60,
+  requires_all_group_entries_to_pass_required_checks: true,
 };
 
 # Function to create a new organization webhook with default settings.

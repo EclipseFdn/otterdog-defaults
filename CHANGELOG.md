@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.8.6] - 2024/09/26
+
+### Added
+
+- Added configuration for merge queues in a repository ruleset.
+
 ## [0.8.5] - 2024/09/03
 
 ### Added
