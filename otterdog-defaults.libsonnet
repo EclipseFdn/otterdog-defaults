@@ -153,6 +153,15 @@ local newPullRequest() = {
   dismisses_stale_reviews: false,
 };
 
+# Function to create status checks with default settings.
+local newStatusChecks() = {
+  do_not_enforce_on_create: false,
+  strict: false,
+  status_checks: [
+    "eclipse-eca-validation:eclipsefdn/eca"
+  ],
+};
+
 # Function to create a new repository ruleset with default settings.
 local newRepoRuleset(name) = {
   name: name,
@@ -169,19 +178,14 @@ local newRepoRuleset(name) = {
   bypass_actors: [],
 
   required_pull_request: newPullRequest(),
+  required_status_checks: newStatusChecks(),
 
   requires_linear_history: false,
   requires_commit_signatures: false,
 
-  requires_status_checks: true,
-  required_status_checks: [
-    "eclipse-eca-validation:eclipsefdn/eca"
-  ],
-  requires_strict_status_checks: false,
-
   requires_deployments: false,
   required_deployment_environments: [],
-  
+
   required_merge_queue: null,
 };
 
@@ -437,5 +441,6 @@ local newOrg(id) = {
   newRepoRuleset:: newRepoRuleset,
   newEnvironment:: newEnvironment,
   newPullRequest:: newPullRequest,
+  newStatusChecks:: newStatusChecks,
   newMergeQueue:: newMergeQueue,
 }

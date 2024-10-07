@@ -1,5 +1,16 @@
 # Change Log
 
+## [0.9.1] - 2024/10/07
+
+### Added
+
+- Added support for parameter `do_not_enforce_on_create` for status checks in a ruleset.
+
+### Changed
+
+- Converted status check related configurations of a ruleset to an embedded model.
+
+
 ## [0.9.0] - 2024/09/26
 
 ### Changed
