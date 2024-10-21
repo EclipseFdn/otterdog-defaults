@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.9.2] - 2024/10/21
+
+### Added
+
+- Added missing parameter `target` for a ruleset.
+
 ## [0.9.1] - 2024/10/07
 
 ### Added
@@ -9,7 +15,6 @@
 ### Changed
 
 - Converted status check related configurations of a ruleset to an embedded model.
-
 
 ## [0.9.0] - 2024/09/26
 
@@ -41,13 +46,11 @@
 - Updated reference to Eclipse Otterdog app as its slug has changed.
 - Removed default values for deprecated and obsolete organization settings.
 
-
 ## [0.8.3] - 2024/06/05
 
 ### Added
 
 - Added configuration for code scanning default setup of a repository.
-
 
 ## [0.8.2] - 2024/04/04
 

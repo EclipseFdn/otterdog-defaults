@@ -101,7 +101,7 @@ local newRepo(name) = {
 
   # branch protection rules
   branch_protection_rules: [],
-  
+
   # rulesets
   rulesets: []
 };
@@ -166,6 +166,7 @@ local newStatusChecks() = {
 local newRepoRuleset(name) = {
   name: name,
   enforcement: "active",
+  target: "branch",
 
   include_refs: [],
   exclude_refs: [],
