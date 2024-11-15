@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.9.3] - 2024/11/15
+
+### Added
+
+- Added a post hook when adding repositories to warn users that permissions will be setup by another service.
+
 ## [0.9.2] - 2024/10/21
 
 ### Added
