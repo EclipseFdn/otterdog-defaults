@@ -21,4 +21,5 @@ if len(added_repo_names) > 0:
         message += f"- https://github.com/{org_config.github_id}/{repo_name}\n"
     message += "\nCommitters will gain access to it once the sync script runs (~2h)."
 
+    self.printer.println()
     self.printer.print_warn(message)
