@@ -201,6 +201,13 @@ local newMergeQueue() = {
   requires_all_group_entries_to_pass_required_checks: true,
 };
 
+# Function to create a new organization ruleset with default settings.
+local newOrgRuleset(name) = newRepoRuleset(name) {
+  include_repo_names: [],
+  exclude_repo_names: [],
+  protect_repo_names: false,
+};
+
 # Function to create a new organization webhook with default settings.
 local newOrgWebhook(url) = {
   active: true,
@@ -215,32 +222,28 @@ local newOrgWebhook(url) = {
 # Function to create a new repository webhook with default settings.
 local newRepoWebhook(url) = newOrgWebhook(url);
 
-# Function to create a new organization secret with default settings.
-local newOrgSecret(name) = {
-  name: name,
-  visibility: "public",
-  selected_repositories: [],
-  value: null
-};
-
 # Function to create a new repository secret with default settings.
 local newRepoSecret(name) = {
   name: name,
   value: null
 };
 
-# Function to create a new organization variable with default settings.
-local newOrgVariable(name) = {
-  name: name,
+# Function to create a new organization secret with default settings.
+local newOrgSecret(name) = newRepoSecret(name) {
   visibility: "public",
   selected_repositories: [],
-  value: null
 };
 
 # Function to create a new repository variable with default settings.
 local newRepoVariable(name) = {
   name: name,
   value: null
+};
+
+# Function to create a new organization variable with default settings.
+local newOrgVariable(name) = newRepoVariable(name) {
+  visibility: "public",
+  selected_repositories: [],
 };
 
 # Function to create a new environment with default settings.
@@ -370,6 +373,9 @@ local newOrg(id) = {
   # organization webhooks
   webhooks: [],
 
+  # organization rulesets
+  rulesets: [],
+
   # List of repositories of the organization.
   # Entries here can be extended during template manifestation:
   #  * new repos should be defined using the newRepo template
@@ -432,6 +438,7 @@ local newOrg(id) = {
   newOrgWebhook:: newOrgWebhook,
   newOrgSecret:: newOrgSecret,
   newOrgVariable:: newOrgVariable,
+  newOrgRuleset:: newOrgRuleset,
   newCustomProperty:: newCustomProperty,
   newRepo:: newRepo,
   extendRepo:: extendRepo,

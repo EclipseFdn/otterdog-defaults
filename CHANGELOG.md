@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.10.0] - 2024/11/20
+
+### Added
+
+- Added configuration for organization rulesets.
+
 ## [0.9.3] - 2024/11/15
 
 ### Added
