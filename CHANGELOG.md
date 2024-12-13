@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.10.1] - unreleased
+
+### Added
+
+- Added validation for `two_factor_requirement` to be enabled.
+
 ## [0.10.0] - 2024/11/20
 
 ### Added
