@@ -246,6 +246,14 @@ local newOrgVariable(name) = newRepoVariable(name) {
   selected_repositories: [],
 };
 
+# Function to create a new organization role with default settings.
+local newOrgRole(name) = {
+  name: name,
+  description: "",
+  permissions: [],
+  base_role: "none",
+};
+
 # Function to create a new environment with default settings.
 local newEnvironment(name) = {
   name: name,
@@ -267,7 +275,8 @@ local newCustomProperty(name) = {
 };
 
 # Function to create a new organization with default settings.
-local newOrg(id) = {
+local newOrg(name, id) = {
+  project_name: name,
   github_id: id,
   settings: {
     name: null,
@@ -341,7 +350,11 @@ local newOrg(id) = {
 
     members_can_change_project_visibility: true,
 
-    security_managers: ["eclipsefdn-security"],
+    security_manager_role: "security_team",
+    security_managers: [
+      "eclipsefdn-security",
+      "%(project_slug)s-security" % { project_slug: std.strReplace($.project_name, ".", "-") },
+    ],
 
     custom_properties: [],
 
@@ -363,6 +376,24 @@ local newOrg(id) = {
       actions_can_approve_pull_request_reviews: true,
     }
   },
+
+  # organization roles
+  roles: [
+    newOrgRole('security_team') {
+      base_role: "read",
+      description: "The security team role.",
+      permissions: [
+        "delete_alerts_code_scanning",
+        "org_review_and_manage_secret_scanning_bypass_requests",
+        "read_code_scanning",
+        "resolve_dependabot_alerts",
+        "resolve_secret_scanning_alerts",
+        "view_dependabot_alerts",
+        "view_secret_scanning_alerts",
+        "write_code_scanning",
+      ],
+    },
+  ],
 
   # organization secrets
   secrets: [],
@@ -435,6 +466,7 @@ local newOrg(id) = {
 
 {
   newOrg:: newOrg,
+  newOrgRole:: newOrgRole,
   newOrgWebhook:: newOrgWebhook,
   newOrgSecret:: newOrgSecret,
   newOrgVariable:: newOrgVariable,

@@ -1,9 +1,11 @@
 # Change Log
 
-## [0.10.1] - unreleased
+## [0.11.0] - unreleased
 
 ### Added
 
+- Added configuration for default security managers for each org.
+- Added configuration for organization roles.
 - Added validation for `plan` to be `enterprise`.
 - Added validation for `two_factor_requirement` to be enabled.
 
