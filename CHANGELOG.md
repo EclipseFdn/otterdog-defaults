@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.12.0] - 2024/12/20
+
+### Added
+
+- Added configuration for custom property 'eclipse_project' to indicate to which project a repository is associated with.
+
 ## [0.11.0] - 2024/12/20
 
 ### Added
