@@ -355,7 +355,14 @@ local newOrg(name, id) = {
       "%(project_slug)s-security" % { project_slug: std.strReplace($.project_name, ".", "-") },
     ],
 
-    custom_properties: [],
+    custom_properties+: [
+      orgs.newCustomProperty('eclipse_project') {
+        default_value: $.project_name,
+        description: "the Eclipse project this repository belongs to",
+        required: true,
+        value_type: "string",
+      },
+    ],
 
     workflows: {
       # enable workflows for all repositories
@@ -431,6 +438,11 @@ local newOrg(name, id) = {
           required_status_checks: ['eclipse-otterdog:eclipsefdn/otterdog-sync', 'eclipse-otterdog:eclipsefdn/otterdog-validation'],
         },
       ],
+
+      custom_properties+: {
+        eclipse_project: "foundation-internal",
+      },
+
       environments: [
         newEnvironment('github-pages') {
           branch_policies: [
