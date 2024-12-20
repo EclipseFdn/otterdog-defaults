@@ -68,6 +68,9 @@ local newRepo(name) = {
   gh_pages_source_branch: null,
   gh_pages_source_path: null,
 
+  # Custom Properties
+  custom_properties: {},
+
   workflows: {
     enabled: true,
 
@@ -98,7 +101,7 @@ local newRepo(name) = {
 
   # branch protection rules
   branch_protection_rules: [],
-  
+
   # rulesets
   rulesets: []
 };
@@ -141,10 +144,29 @@ local newBranchProtectionRule(pattern) = {
   required_deployment_environments: []
 };
 
+# Function to create a pull request with default settings.
+local newPullRequest() = {
+  required_approving_review_count: 2,
+  requires_code_owner_review: false,
+  requires_last_push_approval: false,
+  requires_review_thread_resolution: false,
+  dismisses_stale_reviews: false,
+};
+
+# Function to create status checks with default settings.
+local newStatusChecks() = {
+  do_not_enforce_on_create: false,
+  strict: false,
+  status_checks: [
+    "eclipse-eca-validation:eclipsefdn/eca"
+  ],
+};
+
 # Function to create a new repository ruleset with default settings.
 local newRepoRuleset(name) = {
   name: name,
   enforcement: "active",
+  target: "branch",
 
   include_refs: [],
   exclude_refs: [],
@@ -152,28 +174,38 @@ local newRepoRuleset(name) = {
   allows_creations: false,
   allows_deletions: false,
   allows_force_pushes: false,
-  allows_updates: false,
+  allows_updates: true,
 
   bypass_actors: [],
 
-  requires_pull_request: true,
-  required_approving_review_count: 2,
-  requires_code_owner_review: false,
-  requires_last_push_approval: true,
-  requires_review_thread_resolution: true,
-  dismisses_stale_reviews: true,
+  required_pull_request: newPullRequest(),
+  required_status_checks: newStatusChecks(),
 
   requires_linear_history: false,
-  requires_commit_signatures: true,
-
-  requires_status_checks: true,
-  required_status_checks: [
-    "eclipse-eca-validation:eclipsefdn/eca"
-  ],
-  requires_strict_status_checks: false,
+  requires_commit_signatures: false,
 
   requires_deployments: false,
   required_deployment_environments: [],
+
+  required_merge_queue: null,
+};
+
+# Function to create a merge queue with default settings.
+local newMergeQueue() = {
+  merge_method: "MERGE",
+  build_concurrency: 5,
+  min_group_size: 1,
+  max_group_size: 5,
+  wait_time_for_minimum_group_size: 5,
+  status_check_timeout: 60,
+  requires_all_group_entries_to_pass_required_checks: true,
+};
+
+# Function to create a new organization ruleset with default settings.
+local newOrgRuleset(name) = newRepoRuleset(name) {
+  include_repo_names: [],
+  exclude_repo_names: [],
+  protect_repo_names: false,
 };
 
 # Function to create a new organization webhook with default settings.
@@ -190,32 +222,36 @@ local newOrgWebhook(url) = {
 # Function to create a new repository webhook with default settings.
 local newRepoWebhook(url) = newOrgWebhook(url);
 
-# Function to create a new organization secret with default settings.
-local newOrgSecret(name) = {
-  name: name,
-  visibility: "public",
-  selected_repositories: [],
-  value: null
-};
-
 # Function to create a new repository secret with default settings.
 local newRepoSecret(name) = {
   name: name,
   value: null
 };
 
-# Function to create a new organization variable with default settings.
-local newOrgVariable(name) = {
-  name: name,
+# Function to create a new organization secret with default settings.
+local newOrgSecret(name) = newRepoSecret(name) {
   visibility: "public",
   selected_repositories: [],
-  value: null
 };
 
 # Function to create a new repository variable with default settings.
 local newRepoVariable(name) = {
   name: name,
   value: null
+};
+
+# Function to create a new organization variable with default settings.
+local newOrgVariable(name) = newRepoVariable(name) {
+  visibility: "public",
+  selected_repositories: [],
+};
+
+# Function to create a new organization role with default settings.
+local newOrgRole(name) = {
+  name: name,
+  description: "",
+  permissions: [],
+  base_role: "none",
 };
 
 # Function to create a new environment with default settings.
@@ -228,8 +264,19 @@ local newEnvironment(name) = {
   branch_policies: [],
 };
 
+# Function to create a new custom property with default settings.
+local newCustomProperty(name) = {
+  name: name,
+  value_type: "string",
+  required: false,
+  default_value: null,
+  description: null,
+  allowed_values: [],
+};
+
 # Function to create a new organization with default settings.
-local newOrg(id) = {
+local newOrg(name, id) = {
+  project_name: name,
   github_id: id,
   settings: {
     name: null,
@@ -303,7 +350,12 @@ local newOrg(id) = {
 
     members_can_change_project_visibility: true,
 
-    security_managers: ["eclipsefdn-security"],
+    security_managers: [
+      "eclipsefdn-security",
+      "%(project_slug)s-security" % { project_slug: std.strReplace($.project_name, ".", "-") },
+    ],
+
+    custom_properties: [],
 
     workflows: {
       # enable workflows for all repositories
@@ -324,6 +376,9 @@ local newOrg(id) = {
     }
   },
 
+  # organization roles
+  roles: [],
+
   # organization secrets
   secrets: [],
 
@@ -332,6 +387,9 @@ local newOrg(id) = {
 
   # organization webhooks
   webhooks: [],
+
+  # organization rulesets
+  rulesets: [],
 
   # List of repositories of the organization.
   # Entries here can be extended during template manifestation:
@@ -392,9 +450,12 @@ local newOrg(id) = {
 
 {
   newOrg:: newOrg,
+  newOrgRole:: newOrgRole,
   newOrgWebhook:: newOrgWebhook,
   newOrgSecret:: newOrgSecret,
   newOrgVariable:: newOrgVariable,
+  newOrgRuleset:: newOrgRuleset,
+  newCustomProperty:: newCustomProperty,
   newRepo:: newRepo,
   extendRepo:: extendRepo,
   newRepoWebhook:: newRepoWebhook,
@@ -402,5 +463,8 @@ local newOrg(id) = {
   newRepoVariable:: newRepoVariable,
   newBranchProtectionRule:: newBranchProtectionRule,
   newRepoRuleset:: newRepoRuleset,
-  newEnvironment:: newEnvironment
+  newEnvironment:: newEnvironment,
+  newPullRequest:: newPullRequest,
+  newStatusChecks:: newStatusChecks,
+  newMergeQueue:: newMergeQueue,
 }

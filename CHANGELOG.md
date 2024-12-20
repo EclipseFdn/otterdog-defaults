@@ -1,5 +1,61 @@
 # Change Log
 
+## [0.11.0] - 2024/12/20
+
+### Added
+
+- Added configuration for default security managers for each org.
+- Added configuration for organization roles.
+- Added validation for `plan` to be `enterprise`.
+- Added validation for `two_factor_requirement` to be enabled.
+
+## [0.10.0] - 2024/11/20
+
+### Added
+
+- Added configuration for organization rulesets.
+
+## [0.9.3] - 2024/11/15
+
+### Added
+
+- Added a post hook when adding repositories to warn users that permissions will be setup by another service.
+
+## [0.9.2] - 2024/10/21
+
+### Added
+
+- Added missing parameter `target` for a ruleset.
+
+## [0.9.1] - 2024/10/07
+
+### Added
+
+- Added support for parameter `do_not_enforce_on_create` for status checks in a ruleset.
+
+### Changed
+
+- Converted status check related configurations of a ruleset to an embedded model.
+
+## [0.9.0] - 2024/09/26
+
+### Changed
+
+- Changed repository ruleset configuration to be aligned with branch protection rule configuration.
+- Converted pull request related configurations of a ruleset to an embedded model.
+
+## [0.8.6] - 2024/09/26
+
+### Added
+
+- Added configuration for merge queues in a repository ruleset.
+
+## [0.8.5] - 2024/09/03
+
+### Added
+
+- Added configuration for custom properties.
+
 ## [0.8.4] - 2024/06/27
 
 ### Added
@@ -11,13 +67,11 @@
 - Updated reference to Eclipse Otterdog app as its slug has changed.
 - Removed default values for deprecated and obsolete organization settings.
 
-
 ## [0.8.3] - 2024/06/05
 
 ### Added
 
 - Added configuration for code scanning default setup of a repository.
-
 
 ## [0.8.2] - 2024/04/04
 
