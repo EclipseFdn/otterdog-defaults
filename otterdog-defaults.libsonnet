@@ -350,7 +350,6 @@ local newOrg(name, id) = {
 
     members_can_change_project_visibility: true,
 
-    security_manager_role: "security_team",
     security_managers: [
       "eclipsefdn-security",
       "%(project_slug)s-security" % { project_slug: std.strReplace($.project_name, ".", "-") },
@@ -378,22 +377,7 @@ local newOrg(name, id) = {
   },
 
   # organization roles
-  roles: [
-    newOrgRole('security_team') {
-      base_role: "read",
-      description: "The security team role.",
-      permissions: [
-        "delete_alerts_code_scanning",
-        "org_review_and_manage_secret_scanning_bypass_requests",
-        "read_code_scanning",
-        "resolve_dependabot_alerts",
-        "resolve_secret_scanning_alerts",
-        "view_dependabot_alerts",
-        "view_secret_scanning_alerts",
-        "write_code_scanning",
-      ],
-    },
-  ],
+  roles: [],
 
   # organization secrets
   secrets: [],
