@@ -356,7 +356,7 @@ local newOrg(name, id) = {
     ],
 
     custom_properties+: [
-      orgs.newCustomProperty('eclipse_project') {
+      newCustomProperty('eclipse_project') {
         default_value: $.project_name,
         description: "the Eclipse project this repository belongs to",
         required: true,
