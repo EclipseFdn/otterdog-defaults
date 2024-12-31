@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.13.0] - 2024/12/31
+
+### Added
+
+- Added configuration for teams.
+
 ## [0.12.0] - 2024/12/20
 
 ### Added

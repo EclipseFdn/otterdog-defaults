@@ -254,6 +254,17 @@ local newOrgRole(name) = {
   base_role: "none",
 };
 
+# Function to create a new team with default settings.
+local newTeam(name) = {
+  name: name,
+  description: "",
+  privacy: "visible",
+  notifications: true,
+  members: [],
+  skip_members: false,
+  skip_non_organization_members: true,
+};
+
 # Function to create a new environment with default settings.
 local newEnvironment(name) = {
   name: name,
@@ -386,6 +397,18 @@ local newOrg(name, id) = {
   # organization roles
   roles: [],
 
+  # organization teams
+  teams: [
+    newTeam('eclipsefdn-releng') {
+      description: "This team is composed of members of Eclipse Foundation Release Engineering Team staff members. They don't have write permissions to the project repositories.",
+      skip_members: true,
+    },
+    newTeam('eclipsefdn-security') {
+      description: "This team is composed of members of Eclipse Foundation Security Team staff members (https://eclipse.org/security/team.php). They don't have write permissions to the project repositories.",
+      skip_members: true,
+    },
+  ],
+  
   # organization secrets
   secrets: [],
 
@@ -463,6 +486,7 @@ local newOrg(name, id) = {
 {
   newOrg:: newOrg,
   newOrgRole:: newOrgRole,
+  newTeam:: newTeam,
   newOrgWebhook:: newOrgWebhook,
   newOrgSecret:: newOrgSecret,
   newOrgVariable:: newOrgVariable,
