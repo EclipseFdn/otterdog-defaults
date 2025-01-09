@@ -1,5 +1,15 @@
 # Change Log
 
+## [0.13.1] - unreleased
+
+### Added
+
+- Added default `<short-project-name>-security` team.
+
+### Changed
+
+- Changed branch protection in `.eclipsefdn` repo to a ruleset
+
 ## [0.13.0] - 2025/01/01
 
 ### Added

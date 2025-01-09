@@ -288,6 +288,7 @@ local newCustomProperty(name) = {
 # Function to create a new organization with default settings.
 local newOrg(name, id) = {
   project_name: name,
+  project_slug:: std.strReplace($.project_name, ".", "-"),
   github_id: id,
   settings: {
     name: null,
@@ -363,7 +364,7 @@ local newOrg(name, id) = {
 
     security_managers: [
       "eclipsefdn-security",
-      "%(project_slug)s-security" % { project_slug: std.strReplace($.project_name, ".", "-") },
+      "%(project_slug)s-security" % $,
     ],
 
     custom_properties+: [
@@ -399,12 +400,16 @@ local newOrg(name, id) = {
 
   # organization teams
   teams: [
+    newTeam(std.format("%s-security", $.project_slug)) {
+      description:: null, # hide description to ignore it
+      skip_members: true,
+    },
     newTeam('eclipsefdn-releng') {
-      description: "This team is composed of members of Eclipse Foundation Release Engineering Team staff members. They don't have write permissions to the project repositories.",
+      description:: null, # hide description to ignore it
       skip_members: true,
     },
     newTeam('eclipsefdn-security') {
-      description: "This team is composed of members of Eclipse Foundation Security Team staff members (https://eclipse.org/security/team.php). They don't have write permissions to the project repositories.",
+      description:: null, # hide description to ignore it
       skip_members: true,
     },
   ],
@@ -446,19 +451,28 @@ local newOrg(name, id) = {
         actions_can_approve_pull_request_reviews: false,
       },
 
-      branch_protection_rules: [
-        newBranchProtectionRule('main') {
-          bypass_pull_request_allowances: [
+      rulesets: [
+        newRepoRuleset('main') {
+          bypass_actors+: [
             std.format("@%s/eclipsefdn-releng", $['github_id']),
             std.format("@%s/eclipsefdn-security", $['github_id'])
           ],
-          dismisses_stale_reviews: true,
-          requires_pull_request: true,
-          required_approving_review_count: 0,
-          requires_code_owner_reviews: true,
-          requires_status_checks: true,
-          requires_strict_status_checks: true,
-          required_status_checks: ['eclipse-otterdog:eclipsefdn/otterdog-sync', 'eclipse-otterdog:eclipsefdn/otterdog-validation'],
+          include_refs+: [
+            "~DEFAULT_BRANCH",
+          ],
+          required_pull_request+: {
+            required_approving_review_count: 0,
+            requires_code_owner_review: true,
+            requires_last_push_approval: true,
+            dismisses_stale_reviews: true,
+          },
+          required_status_checks+: {
+            strict: true,
+            status_checks: [
+              "eclipse-otterdog:eclipsefdn/otterdog-sync",
+              "eclipse-otterdog:eclipsefdn/otterdog-validation",
+            ],
+          },
         },
       ],
 
