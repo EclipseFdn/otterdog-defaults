@@ -454,6 +454,7 @@ local newOrg(name, id) = {
       rulesets: [
         newRepoRuleset('main') {
           bypass_actors+: [
+            "#OrganizationAdmin",
             std.format("@%s/eclipsefdn-releng", $['github_id']),
             std.format("@%s/eclipsefdn-security", $['github_id'])
           ],
