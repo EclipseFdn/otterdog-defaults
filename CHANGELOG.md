@@ -1,6 +1,6 @@
 # Change Log
 
-## [0.13.1] - unreleased
+## [0.13.1] - 2025/01/09
 
 ### Added
 
@@ -8,7 +8,7 @@
 
 ### Changed
 
-- Changed branch protection in `.eclipsefdn` repo to a ruleset
+- Changed branch protection in `.eclipsefdn` repo to a ruleset.
 
 ## [0.13.0] - 2025/01/01
 
