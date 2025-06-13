@@ -127,7 +127,7 @@ local newBranchProtectionRule(pattern) = {
   push_restrictions: [],
   required_status_checks: [
     # By default, the eclipse contributor agreement check must pass.
-    "eclipse-eca-validation:eclipsefdn/eca",
+    "any:eclipsefdn/eca",
   ],
   requires_pull_request: true,
   required_approving_review_count: 2,
@@ -158,7 +158,7 @@ local newStatusChecks() = {
   do_not_enforce_on_create: false,
   strict: false,
   status_checks: [
-    "eclipse-eca-validation:eclipsefdn/eca"
+    "any:eclipsefdn/eca"
   ],
 };
 
