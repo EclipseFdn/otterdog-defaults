@@ -431,7 +431,7 @@ local newOrg(name, id) = {
   #  * new repos should be defined using the newRepo template
   #  * extending existing repos inherited from the default config should be defined using the extendRepo template
   _repositories:: [
-    newRepo('.eclipsefdn') {
+    newRepo('.eclipsefdn', org=$) {
       description: "Repository to host configurations related to the Eclipse Foundation.",
       homepage: std.format("https://%s.github.io/.eclipsefdn/", $['github_id']),
       template_repository: "EclipseFdn/.eclipsefdn-template",
