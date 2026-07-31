@@ -319,6 +319,9 @@ local newOrg(name, id) = {
     # Repository forking
     members_can_fork_private_repositories: false,
 
+    # Deploy keys
+    deploy_keys_enabled_for_repositories: false,
+
     # Repository defaults: Commit signoff
     web_commit_signoff_required: true,
 
