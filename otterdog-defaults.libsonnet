@@ -85,6 +85,8 @@ local newRepo(name, org=null) = {
 
     # allow actions to approve and merge pull requests
     actions_can_approve_pull_request_reviews: if org == null then true else org.settings.workflows.actions_can_approve_pull_request_reviews,
+
+    max_cache_size_gb: 10,
   },
 
   # repository webhooks
@@ -396,6 +398,8 @@ local newOrg(name, id) = {
 
       # allow actions to approve and merge pull requests
       actions_can_approve_pull_request_reviews: true,
+
+      max_cache_size_gb: 10,
     }
   },
 
