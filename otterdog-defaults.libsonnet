@@ -1,7 +1,7 @@
 local otterdog = import 'otterdog-functions.libsonnet';
 
 # Function to create a new repository with default settings.
-local newRepo(name) = {
+local newRepo(name, org=null) = {
   name: name,
   description: null,
   homepage: null,
@@ -84,7 +84,7 @@ local newRepo(name) = {
     default_workflow_permissions: "read",
 
     # allow actions to approve and merge pull requests
-    actions_can_approve_pull_request_reviews: true,
+    actions_can_approve_pull_request_reviews: if org == null then true else org.settings.workflows.actions_can_approve_pull_request_reviews,
   },
 
   # repository webhooks
@@ -435,7 +435,7 @@ local newOrg(name, id) = {
   #  * new repos should be defined using the newRepo template
   #  * extending existing repos inherited from the default config should be defined using the extendRepo template
   _repositories:: [
-    newRepo('.eclipsefdn') {
+    newRepo('.eclipsefdn', org=$) {
       description: "Repository to host configurations related to the Eclipse Foundation.",
       homepage: std.format("https://%s.github.io/.eclipsefdn/", $['github_id']),
       template_repository: "EclipseFdn/.eclipsefdn-template",
