@@ -285,7 +285,7 @@ local newCustomProperty(name) = {
   default_value: null,
   description: null,
   allowed_values: [],
-  values_editable_by: null,
+  values_editable_by: "org_actors",
 };
 
 # Function to create a new organization with default settings.
@@ -323,7 +323,7 @@ local newOrg(name, id) = {
     members_can_fork_private_repositories: false,
 
     # Deploy keys
-    deploy_keys_enabled_for_repositories: false,
+    deploy_keys_enabled_for_repositories: true,
 
     # Repository defaults: Commit signoff
     web_commit_signoff_required: true,
