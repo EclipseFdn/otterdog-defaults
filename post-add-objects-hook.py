@@ -10,6 +10,7 @@
 
 from otterdog.models.repository import Repository
 
+admin_assignment_orgs = ["adoptium"]
 added_repo_names = []
 for patch in patches:
     if isinstance(patch.expected_object, Repository):
@@ -19,7 +20,10 @@ if len(added_repo_names) > 0:
     message = "The following GitHub repos have been created:\n"
     for repo_name in added_repo_names:
         message += f"- https://github.com/{org_config.github_id}/{repo_name}\n"
-    message += "\nCommitters will gain access to it once the sync script runs (~2h)."
+    if org_config.github_id in admin_assignment_orgs:
+        message += "\nPlease ping an admin to assign the appropriate teams and permissions to the new repo, or open a ticket at https://gitlab.eclipse.org/eclipsefdn/helpdesk."
+    else:
+        message += "\nCommitters will gain access to it once the sync script runs (~2h)."
 
     self.printer.println()
     self.printer.print_warn(message)
