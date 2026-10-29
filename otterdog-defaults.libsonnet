@@ -217,35 +217,38 @@ local newOrgRuleset(name) = newRepoRuleset(name) {
   protect_repo_names: false,
 };
 
-# Function to create a new organization code security configuration with default settings.
+# Function to create a new organization code security configuration with default settings,
+# which apply the security practices of the Eclipse Foundation, the same as the defaults of repositories.
 # Settings set to null are not managed, e.g. as they are not available to every organization.
+# Features set to 'not_set' are left to the repositories, attaching a configuration disables the disabled ones.
 local newOrgCodeSecurityConfiguration(name) = {
   name: name,
   description: "",
 
-  # GitHub Code Security and GitHub Secret Protection
-  code_security: "disabled",
-  secret_protection: "disabled",
+  # GitHub Code Security and GitHub Secret Protection, required by code scanning and secret scanning,
+  # they are free for public repositories and licensed per active committer for private repositories
+  code_security: "enabled",
+  secret_protection: "enabled",
 
   # dependency graph and Dependabot
   dependency_graph: "enabled",
   dependency_graph_autosubmit_action: "disabled",
   dependency_graph_autosubmit_action_labeled_runners: null,
-  dependabot_alerts: "disabled",
-  dependabot_security_updates: "disabled",
+  dependabot_alerts: "enabled",
+  dependabot_security_updates: "not_set",
   dependabot_reachability: null,
   dependabot_delegated_alert_dismissal: null,
 
-  # code scanning
-  code_scanning_default_setup: "disabled",
+  # code scanning, default setup is left to the projects, as it disables their custom CodeQL workflows
+  code_scanning_default_setup: "not_set",
   code_scanning_default_setup_runner_type: null,
   code_scanning_default_setup_runner_label: null,
   code_scanning_allow_advanced: null,
   code_scanning_delegated_alert_dismissal: null,
 
   # secret scanning
-  secret_scanning: "disabled",
-  secret_scanning_push_protection: "disabled",
+  secret_scanning: "enabled",
+  secret_scanning_push_protection: "enabled",
   secret_scanning_delegated_bypass: "disabled",
   secret_scanning_delegated_bypass_reviewers: null,
   secret_scanning_validity_checks: "disabled",
@@ -255,7 +258,7 @@ local newOrgCodeSecurityConfiguration(name) = {
   secret_scanning_delegated_alert_dismissal: null,
   secret_scanning_extended_metadata: null,
 
-  private_vulnerability_reporting: "disabled",
+  private_vulnerability_reporting: "not_set",
   enforcement: "enforced",
 
   # the visibility of new repositories this configuration is applied to by default:
