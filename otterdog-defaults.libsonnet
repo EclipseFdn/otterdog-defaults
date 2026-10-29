@@ -111,7 +111,11 @@ local newRepo(name, org=null) = {
   rulesets: [],
 
   # team permissions
-  team_permissions: {}
+  team_permissions: {},
+
+  # the name of the code security configuration attached to the repo,
+  # null keeps the configuration currently attached to the repo
+  code_security_configuration: null,
 };
 
 # Function to extend an existing repo with the same name.
@@ -214,6 +218,56 @@ local newOrgRuleset(name) = newRepoRuleset(name) {
   include_repo_names: [],
   exclude_repo_names: [],
   protect_repo_names: false,
+};
+
+# Function to create a new organization code security configuration with default settings,
+# which apply the security practices of the Eclipse Foundation, the same as the defaults of repositories.
+# Settings set to null are not managed, e.g. as they are not available to every organization.
+# The configuration never disables a feature, as attaching it disables the disabled ones and its enforcement
+# prevents the repositories from enabling them again: features set to 'not_set' are left to the repositories.
+local newOrgCodeSecurityConfiguration(name) = {
+  name: name,
+  description: "",
+
+  # GitHub Code Security and GitHub Secret Protection, required by code scanning and secret scanning,
+  # they are free for public repositories and licensed per active committer for private repositories
+  code_security: "enabled",
+  secret_protection: "enabled",
+
+  # dependency graph and Dependabot
+  dependency_graph: "enabled",
+  dependency_graph_autosubmit_action: "not_set",
+  dependency_graph_autosubmit_action_labeled_runners: null,
+  dependabot_alerts: "enabled",
+  dependabot_security_updates: "not_set",
+  dependabot_reachability: null,
+  dependabot_delegated_alert_dismissal: null,
+
+  # code scanning, default setup is left to the projects, as it disables their custom CodeQL workflows
+  code_scanning_default_setup: "not_set",
+  code_scanning_default_setup_runner_type: null,
+  code_scanning_default_setup_runner_label: null,
+  code_scanning_allow_advanced: null,
+  code_scanning_delegated_alert_dismissal: null,
+
+  # secret scanning
+  secret_scanning: "enabled",
+  secret_scanning_push_protection: "enabled",
+  secret_scanning_delegated_bypass: "not_set",
+  secret_scanning_delegated_bypass_reviewers: null,
+  secret_scanning_validity_checks: "enabled",
+  secret_scanning_non_provider_patterns: "not_set",
+  secret_scanning_generic_secrets: null,
+  secret_scanning_generic_secrets_push_protection: null,
+  secret_scanning_delegated_alert_dismissal: null,
+  secret_scanning_extended_metadata: null,
+
+  private_vulnerability_reporting: "not_set",
+  enforcement: "enforced",
+
+  # the visibility of new repositories this configuration is applied to by default:
+  # 'none', 'all', 'public' or 'private_and_internal'
+  default_for_new_repos: "none",
 };
 
 # Function to create a new organization webhook with default settings.
@@ -446,6 +500,9 @@ local newOrg(name, id) = {
   # organization rulesets
   rulesets: [],
 
+  # organization code security configurations
+  code_security_configurations: [],
+
   # List of repositories of the organization.
   # Entries here can be extended during template manifestation:
   #  * new repos should be defined using the newRepo template
@@ -526,6 +583,7 @@ local newOrg(name, id) = {
   newOrgSecret:: newOrgSecret,
   newOrgVariable:: newOrgVariable,
   newOrgRuleset:: newOrgRuleset,
+  newOrgCodeSecurityConfiguration:: newOrgCodeSecurityConfiguration,
   newCustomProperty:: newCustomProperty,
   newRepo:: newRepo,
   extendRepo:: extendRepo,
