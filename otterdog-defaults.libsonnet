@@ -220,7 +220,8 @@ local newOrgRuleset(name) = newRepoRuleset(name) {
 # Function to create a new organization code security configuration with default settings,
 # which apply the security practices of the Eclipse Foundation, the same as the defaults of repositories.
 # Settings set to null are not managed, e.g. as they are not available to every organization.
-# Features set to 'not_set' are left to the repositories, attaching a configuration disables the disabled ones.
+# The configuration never disables a feature, as attaching it disables the disabled ones and its enforcement
+# prevents the repositories from enabling them again: features set to 'not_set' are left to the repositories.
 local newOrgCodeSecurityConfiguration(name) = {
   name: name,
   description: "",
@@ -232,7 +233,7 @@ local newOrgCodeSecurityConfiguration(name) = {
 
   # dependency graph and Dependabot
   dependency_graph: "enabled",
-  dependency_graph_autosubmit_action: "disabled",
+  dependency_graph_autosubmit_action: "not_set",
   dependency_graph_autosubmit_action_labeled_runners: null,
   dependabot_alerts: "enabled",
   dependabot_security_updates: "not_set",
@@ -249,10 +250,10 @@ local newOrgCodeSecurityConfiguration(name) = {
   # secret scanning
   secret_scanning: "enabled",
   secret_scanning_push_protection: "enabled",
-  secret_scanning_delegated_bypass: "disabled",
+  secret_scanning_delegated_bypass: "not_set",
   secret_scanning_delegated_bypass_reviewers: null,
-  secret_scanning_validity_checks: "disabled",
-  secret_scanning_non_provider_patterns: "disabled",
+  secret_scanning_validity_checks: "enabled",
+  secret_scanning_non_provider_patterns: "not_set",
   secret_scanning_generic_secrets: null,
   secret_scanning_generic_secrets_push_protection: null,
   secret_scanning_delegated_alert_dismissal: null,
